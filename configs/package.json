@@ -1,4 +1,9 @@
 {
+  "scripts": {
+    "lint": "prettier --check src && eslint src",
+    "test": "jest",
+    "ci": "npm run lint && npm run test"
+  },
   "devDependencies": {
     "eslint": "^8.29.0",
     "eslint-plugin-react": "^7.31.10",
