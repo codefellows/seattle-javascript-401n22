@@ -9,13 +9,13 @@ console.log(decoded);
 
 // Authorization information:
 // Basic <base64 username:password>
-let username = "davidsouther";
+let username = "Maru";
 let password = "maru5";
 let authorization = `${username}:${password}`;
-let encoded_authorization = base64.encode(authorization);
+let encoded_authorization = "Basic " + base64.encode(authorization);
 
 // Send this to the server, using the headers
-console.log("Authorization: Basic", encoded_authorization);
+console.log("Authorization:", encoded_authorization);
 
 // From the server, checking the header:
 let decoded_authorization = base64.decode(encoded_authorization);
