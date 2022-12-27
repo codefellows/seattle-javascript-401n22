@@ -2,6 +2,7 @@ const { Sequelize } = require('sequelize');
 const { makeUser } = require('./user.model');
 const { makeDepartment } = require('./department.model');
 const { makeHobby } = require('./hobby');
+const { makeAuthUser } = require('../auth/model');
 
 const DATABASE_URL =
   process.env.NODE_ENV === 'test'
@@ -11,7 +12,7 @@ const DATABASE_URL =
 const CONNECTION_OPTIONS =
   process.env.NODE_ENV === 'test'
     ? {
-        logging: false,
+        // logging: false,
       }
     : {
         ssl: {
@@ -25,6 +26,7 @@ const sequelize = new Sequelize(DATABASE_URL, CONNECTION_OPTIONS);
 const User = makeUser(sequelize);
 const Department = makeDepartment(sequelize);
 const Hobby = makeHobby(sequelize);
+const AuthUser = makeAuthUser(sequelize);
 
 // Department.hasMany(User);
 // User.belongsTo(Department);
@@ -36,6 +38,7 @@ module.exports = {
   User,
   Department,
   Hobby,
+  AuthUser,
   // Food,
   // Cars
 };

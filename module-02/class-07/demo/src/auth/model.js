@@ -1,23 +1,26 @@
 const { DataTypes } = require('sequelize');
 const bcrypt = require('bcrypt');
-const { sequelize } = require('../models');
 
 const COMPLEXITY = process.env.COMPLEXITY ?? 8;
 
-function makeUser(sequelize) {
-  const User = sequelize.define('AuthUser', {
+function makeAuthUser(sequelize) {
+  const AuthUser = sequelize.define('Auth', {
     username: DataTypes.STRING,
     password: DataTypes.STRING,
   });
 
-  User.createWithHashed = async (username, password) => {
-    password = await bcrypt.hash(password, COMPLEXITY);
-    return await User.create({ username, password });
+  AuthUser.createWithHashed = async (username, password) => {
+    try {
+      password = await bcrypt.hash(password, COMPLEXITY);
+      return await AuthUser.create({ username, password });
+    } catch (e) {
+      console.error(e);
+    }
   };
 
-  User.findLoggedIn = async (username, password) => {
+  AuthUser.findLoggedIn = async (username, password) => {
     try {
-      const user = await User.findOne({ where: { username } });
+      const user = await AuthUser.findOne({ where: { username } });
       if (user == null) {
         return null;
       }
@@ -29,9 +32,7 @@ function makeUser(sequelize) {
     }
   };
 
-  return User;
+  return AuthUser;
 }
 
-const User = makeUser(sequelize);
-
-module.exports = { User };
+module.exports = { makeAuthUser };

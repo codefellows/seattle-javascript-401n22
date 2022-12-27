@@ -1,10 +1,13 @@
 const express = require('express');
+const { checkToken, authRoutes } = require('./auth/route');
 const { userRoutes } = require('./routes/user.route');
 
 const server = express();
 
 server.use(logger);
 server.use(express.json());
+
+server.use(authRoutes);
 
 server.get('/hello', (_, res) => res.send('Hello!'));
 server.use((req, res, next) => {
@@ -40,6 +43,10 @@ const nameValidator = (req, res, next) => {
 // server.use(nameValidator);
 server.get('/person', nameValidator, (req, res) => {
   res.status(200).send({ name: req.name });
+});
+
+server.get('/loggedin', checkToken, (req, res) => {
+  res.status(200).send('You are logged in, ' + req.username);
 });
 
 server.get('/throw_error', () => {
