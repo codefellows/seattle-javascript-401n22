@@ -16,13 +16,15 @@ async function signup(req, res, next) {
   try {
     // On a successful account creation, return a 201 status.
     const { username, password } = req.body;
-    await AuthUser.createWithHashed(username, password);
+    await AuthUser.createWithHashed(username, password, 'reader');
     res.send(201);
   } catch (cause) {
     // On any error, trigger your error handler with an appropriate error.
     next(new Error('Failed to create user', { cause }));
   }
 }
+
+// TODO: Make a route that lets us change a user's role (it should be admin only).
 
 // Send a basic authentication header with a properly encoded username and password combination.
 // On a successful account login, return a 200 status with the user object in the body.
@@ -42,7 +44,8 @@ async function signin(req, res, next) {
     if (user) {
       // res.status(200).send({ username: user.username });
       // Instead of sending back the username, send a JSON Web Token (jwt)
-      const data = { username: user.username }; // More data in lab 8
+      const data = { username: user.username, role: user.role };
+      // Need a way to expire tokens if the role changes
       const token = jwt.sign(data, TOKEN_SECRET);
       res.send(token);
     } else {
@@ -65,10 +68,21 @@ async function checkToken(req, _, next) {
     const token = authorization.replace('Bearer ', '');
     const decoded = jwt.verify(token, TOKEN_SECRET);
     req.username = decoded.username;
+    req.role = decoded.role;
     next();
   } catch (e) {
     next(new Error('Failed to decode authorization', { cause: e }));
   }
 }
 
-module.exports = { authRoutes, signup, signin, checkToken };
+function ensureRole(roles) {
+  return function checkRole(req, _, next) {
+    if (roles.includes(req.role)) {
+      next();
+    } else {
+      next(new Error('Insufficient permissions'));
+    }
+  };
+}
+
+module.exports = { authRoutes, signup, signin, checkToken, ensureRole };

@@ -1,6 +1,7 @@
 const express = require('express');
 const { checkToken, authRoutes } = require('./auth/route');
 const { userRoutes } = require('./routes/user.route');
+const { blogRoutes } = require('./routes/blog.route');
 
 const server = express();
 
@@ -29,7 +30,8 @@ server.get('/hello/:name', (req, res) =>
 // When you say goodbye, you recieve "nailed it"
 server.get('/goodbye', (_, res) => res.send('Nailed It!'));
 
-server.use(userRoutes);
+server.use('/api/v1', userRoutes);
+server.use('/api/v2', blogRoutes);
 
 const nameValidator = (req, res, next) => {
   if (req.query.name) {
@@ -46,7 +48,7 @@ server.get('/person', nameValidator, (req, res) => {
 });
 
 server.get('/loggedin', checkToken, (req, res) => {
-  res.status(200).send('You are logged in, ' + req.username);
+  res.status(200).send('You are logged in, ' + req.blogname);
 });
 
 server.get('/throw_error', () => {
