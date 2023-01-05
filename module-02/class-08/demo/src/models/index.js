@@ -3,6 +3,7 @@ const { makeUser } = require('./user.model');
 const { makeDepartment } = require('./department.model');
 const { makeHobby } = require('./hobby');
 const { makeAuthUser } = require('../auth/model');
+const { makeBlog } = require('./blog.model');
 
 const DATABASE_URL =
   process.env.NODE_ENV === 'test'
@@ -27,6 +28,7 @@ const User = makeUser(sequelize);
 const Department = makeDepartment(sequelize);
 const Hobby = makeHobby(sequelize);
 const AuthUser = makeAuthUser(sequelize);
+const Blog = makeBlog(sequelize);
 
 // Department.hasMany(User);
 // User.belongsTo(Department);
@@ -39,6 +41,7 @@ module.exports = {
   Department,
   Hobby,
   AuthUser,
+  Blog,
   // Food,
   // Cars
 };

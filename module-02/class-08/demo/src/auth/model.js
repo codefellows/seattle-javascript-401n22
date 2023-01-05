@@ -7,12 +7,13 @@ function makeAuthUser(sequelize) {
   const AuthUser = sequelize.define('Auth', {
     username: DataTypes.STRING,
     password: DataTypes.STRING,
+    role: DataTypes.STRING, // "reader", "writer", "editor", "admin"
   });
 
-  AuthUser.createWithHashed = async (username, password) => {
+  AuthUser.createWithHashed = async (username, password, role) => {
     try {
       password = await bcrypt.hash(password, COMPLEXITY);
-      return await AuthUser.create({ username, password });
+      return await AuthUser.create({ username, password, role });
     } catch (e) {
       console.error(e);
     }
