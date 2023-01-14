@@ -5,6 +5,10 @@ class LinkedList {
     this.size = 0;
   }
 
+  isEmpty() {
+    return this.head === null;
+  }
+
   insert(value) {
     this.head = {
       value,
@@ -23,10 +27,6 @@ class LinkedList {
       this.tail = this.tail.next = { item };
       this.size += 1;
     }
-  }
-
-  isEmpty() {
-    return this.head === null;
   }
 
   toString() {
