@@ -1,0 +1,12 @@
+{
+  "scripts": {
+    "test": "jest",
+    "start": "node src/hub.js"
+  },
+  "dependencies": {
+    "@types/jest": "^29.2.5",
+    "@types/node": "^18.11.18",
+    "chance": "^1.1.9",
+    "jest": "^29.3.1"
+  }
+}
