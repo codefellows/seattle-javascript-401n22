@@ -1,5 +1,9 @@
 {
   "scripts": {
     "start": "node src/hub.js"
+  },
+  "dependencies": {
+    "@types/node": "^18.11.18",
+    "chance": "^1.1.9"
   }
 }
