@@ -45,6 +45,6 @@ describe("Queues", () => {
     let queue = new Queue();
     expect(() => {
       queue.dequeue();
-    }).toThrow("Queue is empty");
+    }).toThrow("Queue is Empty");
   });
 });

@@ -10,7 +10,10 @@ class Stack {
   }
 
   peek() {
-    return this.list.head?.value;
+    if (!this.list.head) {
+      return null;
+    }
+    return this.list.head.value;
   }
 
   pop() {
