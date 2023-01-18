@@ -1,6 +1,7 @@
-const { events, chance, EVENT_NAMES } = require("../events");
+const { chance, EVENT_NAMES } = require("../utils");
+const { io } = require("socket.io-client");
 
-// 1. Vendor sends pickup event for a store
+const events = io("ws://localhost:3333");
 
 function sendPickup() {
   const event = {
@@ -31,4 +32,4 @@ function startVendor() {
   // The pattern
 }
 
-module.exports = { startVendor };
+startVendor();

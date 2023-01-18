@@ -1,4 +1,7 @@
-const { events, EVENT_NAMES, chance } = require("../events");
+const { EVENT_NAMES, chance } = require("../utils");
+
+const { io } = require("socket.io-client");
+const events = io("ws://localhost:3333");
 
 function deliver(orderId) {
   console.log("Driver finished delivery", orderId);
@@ -20,9 +23,10 @@ function startDriver() {
 }
 
 module.exports = {
-  startDriver,
   toTest: {
     deliver,
     handlePickup,
   },
 };
+
+startDriver();
