@@ -4,12 +4,12 @@ const { io } = require("socket.io-client");
 const events = io("ws://localhost:3333");
 
 function deliver(orderId) {
-  console.log("Driver finished delivery", orderId);
+  console.log(`Driver finished delivery`, events.id, orderId);
   events.emit(EVENT_NAMES.delivered, orderId);
 }
 
 function handlePickup(event) {
-  console.log("Driver received a pickup event!", event.orderId);
+  console.log("Driver received a pickup event!", events.id, event.orderId);
   setTimeout(
     () => deliver(event.orderId),
     chance.integer({ min: 500, max: 1000 })
@@ -17,7 +17,7 @@ function handlePickup(event) {
 }
 
 function startDriver() {
-  console.log("Driver ready!");
+  console.log("Driver ready!", events.id);
 
   events.on(EVENT_NAMES.pickup, handlePickup);
 }
