@@ -9,12 +9,12 @@ function startEventServer() {
 
     // BUSY WORK! Whenever the hub gets a pickup or delivered event, send it to everyone!
     socket.on(EVENT_NAMES.delivered, (delivered) => {
-      console.log("HUB delivered", delivered);
+      console.log("HUB delivered by driver", socket.id, delivered);
       io.emit(EVENT_NAMES.delivered, delivered);
     });
 
     socket.on(EVENT_NAMES.pickup, (pickup) => {
-      console.log("HUB pickup", pickup.orderId);
+      console.log("HUB pickup from client", socket.id, pickup.orderId);
       io.emit(EVENT_NAMES.pickup, pickup);
     });
   });

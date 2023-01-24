@@ -3,8 +3,8 @@
     "test": "jest",
     "start": "concurrently npm:hub npm:driver npm:vendor",
     "hub": "node src/hub.js",
-    "driver": "node src/driver/index.js",
-    "vendor": "node src/vendor/index.js"
+    "driver": "node src/driver/handler.js",
+    "vendor": "node src/vendor/handler.js"
   },
   "dependencies": {
     "@types/jest": "^29.2.5",
