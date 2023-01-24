@@ -3,6 +3,7 @@ const chance = require("chance")();
 const EVENT_NAMES = {
   pickup: "pickup",
   delivered: "delivered",
+  driverReady: "driver ready",
 };
 
 class Queue {

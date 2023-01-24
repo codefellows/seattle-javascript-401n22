@@ -3,6 +3,7 @@ const { EVENT_NAMES, chance } = require("../utils");
 function deliver(orderId, ioClient) {
   console.log(`Driver finished delivery`, ioClient.id, orderId);
   ioClient.emit(EVENT_NAMES.delivered, orderId);
+  ioClient.emit(EVENT_NAMES.driverReady);
 }
 
 function handlePickup(payload, ioClient) {
@@ -14,9 +15,9 @@ function handlePickup(payload, ioClient) {
 }
 
 function startDriver(ioClient) {
-  console.log("Driver ready!", ioClient.id);
-
   ioClient.on(EVENT_NAMES.pickup, (event) => handlePickup(event, ioClient));
+  ioClient.emit(EVENT_NAMES.driverReady);
+  console.log("Driver ready!", ioClient.id);
 }
 
 module.exports = {
