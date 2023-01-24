@@ -1,3 +1,6 @@
+const { Server } = require("socket.io");
 const { startEventServer } = require("./hub");
 
-startEventServer();
+const io = new Server(3333);
+
+startEventServer(io);

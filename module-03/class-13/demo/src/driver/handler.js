@@ -1,25 +1,22 @@
 const { EVENT_NAMES, chance } = require("../utils");
 
-const { io } = require("socket.io-client");
-const events = io("ws://localhost:3333");
-
-function deliver(orderId) {
-  console.log(`Driver finished delivery`, events.id, orderId);
-  events.emit(EVENT_NAMES.delivered, orderId);
+function deliver(orderId, ioClient) {
+  console.log(`Driver finished delivery`, ioClient.id, orderId);
+  ioClient.emit(EVENT_NAMES.delivered, orderId);
 }
 
-function handlePickup(event) {
-  console.log("Driver received a pickup event!", events.id, event.orderId);
+function handlePickup(payload, ioClient) {
+  console.log("Driver received a pickup event!", ioClient.id, payload.orderId);
   setTimeout(
-    () => deliver(event.orderId),
+    () => deliver(payload.orderId, ioClient),
     chance.integer({ min: 500, max: 1000 })
   );
 }
 
-function startDriver() {
-  console.log("Driver ready!", events.id);
+function startDriver(ioClient) {
+  console.log("Driver ready!", ioClient.id);
 
-  events.on(EVENT_NAMES.pickup, handlePickup);
+  ioClient.on(EVENT_NAMES.pickup, (event) => handlePickup(event, ioClient));
 }
 
 module.exports = {
