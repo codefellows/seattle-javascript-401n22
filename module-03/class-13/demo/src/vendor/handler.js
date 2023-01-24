@@ -33,4 +33,6 @@ function startVendor() {
   // The pattern
 }
 
-startVendor();
+module.exports = {
+  startVendor,
+};

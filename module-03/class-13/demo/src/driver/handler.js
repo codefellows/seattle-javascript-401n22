@@ -23,10 +23,9 @@ function startDriver() {
 }
 
 module.exports = {
+  startDriver,
   toTest: {
     deliver,
     handlePickup,
   },
 };
-
-startDriver();
