@@ -114,19 +114,19 @@ class BST extends BinaryTree {
   // no replication of values
   contains(number) {
     if (!this.root) return false;
-    else _walk(this.root, number);
+    return _walk(this.root, number);
 
     function _walk(current, number) {
       if (number === current.value) return true;
       else if (number > current.value) {
         if (current.right) {
-          _walk(current.right, number);
+          return _walk(current.right, number);
         } else {
           return false;
         }
       } else if (number < current.value) {
         if (current.left) {
-          _walk(current.left, number);
+          return _walk(current.left, number);
         }
         return false;
       }
