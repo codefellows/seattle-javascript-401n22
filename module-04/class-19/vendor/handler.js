@@ -1,8 +1,8 @@
 const { SendMessageCommand } = require("@aws-sdk/client-sqs");
 
-const { sqsClient, chance } = require("../util");
+const { sqsClient, chance, QUEUES } = require("../util");
 
-function sendPickup(vendorId) {
+async function sendPickup(vendorId) {
   const event = {
     vendor: vendorId,
     store: chance.city(),
@@ -12,6 +12,19 @@ function sendPickup(vendorId) {
   };
   console.log("Vendor asking for pickup!", event.vendor, event);
   // ioClient.emit(EVENT_NAMES.pickup, event);
+  try {
+    const message = await sqsClient.send(
+      new SendMessageCommand({
+        MessageBody: JSON.stringify(event),
+        MessageGroupId: vendorId,
+        QueueUrl: QUEUES.Pickup,
+      })
+    );
+    console.log("Vendor send pickup request!", message.MessageId);
+    return message;
+  } catch (e) {
+    console.error("Failed to send Pickup message", e);
+  }
 }
 
 function startVendor(name) {

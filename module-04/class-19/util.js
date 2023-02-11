@@ -8,4 +8,8 @@ const sqsClient = new SQSClient({ region: REGION });
 
 const chance = new Chance();
 
-module.exports = { sqsClient, chance };
+const QUEUES = {
+  Pickup: "https://sqs.us-west-2.amazonaws.com/758444019065/CAPSn22Pickup.fifo",
+};
+
+module.exports = { sqsClient, chance, QUEUES };
