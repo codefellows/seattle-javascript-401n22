@@ -14,6 +14,7 @@ function App() {
   return (
     <>
       {/* <Header /> */}
+      <header>Sam 'n Cookies</header>
       <CookieTable stores={stores} />
       {/* <Footer /> */}
     </>
