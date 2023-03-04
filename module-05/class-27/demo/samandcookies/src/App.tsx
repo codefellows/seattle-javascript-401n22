@@ -13,10 +13,12 @@ function App() {
   ];
   return (
     <>
-      {/* <Header /> */}
-      <header>Sam 'n Cookies</header>
-      <CookieTable stores={stores} />
-      {/* <Footer /> */}
+      <header className="fluid">
+        <h1>Sam 'n Cookies</h1>
+      </header>
+      <main className="fluid">
+        <CookieTable stores={stores} />
+      </main>
     </>
   );
 }
