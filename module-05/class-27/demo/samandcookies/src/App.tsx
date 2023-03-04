@@ -4,6 +4,7 @@ import { CookieForm } from "./components/CookieForm";
 // import { Header } from "./components/header";
 // import { Footer } from "./components/footer";
 import { CookieTable, CookieStand } from "./components/CookieTable";
+import { OpenAI } from "./components/OpenAI";
 
 function App() {
   const [stores, setStores] = useState<CookieStand[]>([
@@ -20,24 +21,15 @@ function App() {
         <h1>Sam 'n Cookies</h1>
       </header>
       <main className="fluid">
-        <CookieTable stores={stores} />
+        <OpenAI />
+        {/* <CookieTable stores={stores} />
         <CookieForm
           onAddStore={(newStore: CookieStand): void => {
             // add new store to exising array of stores
-            // stores.push(store);
             const newStores = [...stores, newStore];
             setStores(newStores);
-
-            // const newStores = [...stores, newStore]
-
-            // const newStores = [];
-            // for (let i = 0; i < stores.length; i++) {
-            //   const store = stores[i];
-            //   newStores.push(store);
-            // }
-            // newStores.push(newStore)
           }}
-        />
+        /> */}
       </main>
     </>
   );
