@@ -16,22 +16,22 @@ function acknowledgeDelivery(orderId, ioClient) {
   console.log("Vendor thank you for the delivery!", ioClient.id, orderId);
 }
 
-function startVendor(ioClient) {
-  ioClient.on(EVENT_NAMES.delivered, (orderId) =>
-    acknowledgeDelivery(orderId, ioClient)
+function startvendor(ioclient) {
+  ioclient.on(event_names.delivered, (orderid) =>
+    acknowledgedelivery(orderid, ioclient)
   );
-  console.log("Vendor ready!");
+  console.log("vendor ready!");
 
-  // Copy this pattern
+  // copy this pattern
   function ready() {
-    sendPickup(ioClient);
+    sendpickup(ioclient);
 
-    setTimeout(ready, chance.integer({ min: 3000, max: 4000 }));
+    settimeout(ready, chance.integer({ min: 3000, max: 4000 }));
   }
   ready();
-  // The pattern
+  // the pattern
 }
 
 module.exports = {
-  startVendor,
+  startvendor,
 };
