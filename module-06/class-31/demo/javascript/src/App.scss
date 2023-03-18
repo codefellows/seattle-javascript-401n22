@@ -1,0 +1,41 @@
+:root {
+  --form-bg-color: chartreuse;
+  --form-element-bg-color: pink;
+}
+
+form {
+  background-color: var(--form-bg-color);
+  --columns: 1;
+
+  display: grid;
+  grid-template-columns: repeat(var(--columns) 1fr);
+}
+
+form > h2 {
+  grid-column: span var(--columns);
+}
+
+form > label {
+  display: block;
+  background-color: var(--form-element-bg-color);
+}
+
+@media (min-width: 376px) {
+  form {
+    --columns: 2;
+  }
+
+  form > label {
+    --form-element-bg-color: purple;
+  }
+}
+
+@media (min-width: 767px) {
+  form {
+    --columns: 4;
+  }
+
+  form > label {
+    --form-element-bg-color: turquoise;
+  }
+}
