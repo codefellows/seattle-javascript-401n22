@@ -1,0 +1,28 @@
+body, html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+#root {
+  display:flex;
+  flex-direction:column;
+  flex: 1;
+}
+
+header {
+  background: #eee;
+}
+main {
+  flex: 1;
+}
+
+footer {
+  background: #111;
+  color: #eee;
+}
