@@ -5,17 +5,20 @@ import Footer from './components/Footer';
 import Main from './components/Main';
 
 import SettingsContext from './context/Settings';
+import ThemeContext from './context/Theme';
 
 function App() {
   return (
-    <SettingsContext>
-      <Header />
-      <Main>
-        <div>Hello</div>
-        <div>World</div>
-      </Main>
-      <Footer />
-    </SettingsContext>
+    <ThemeContext>
+      <SettingsContext>
+        <Header />
+        <Main>
+          <div>Hello</div>
+          <div>World</div>
+        </Main>
+        <Footer />
+      </SettingsContext>
+    </ThemeContext>
   );
 }
 

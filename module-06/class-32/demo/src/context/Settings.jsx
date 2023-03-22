@@ -6,14 +6,14 @@ function SettingsProvider(props) {
   const [name, setName] = useState('Nobody');
 
    // Proxy Function
-   const changName = (newName) => {
-    newName = newName.toUpperCase();
+   const changeName = (newName) => {
+    // newName = newName.toUpperCase();
     setName(newName);
    };
 
    let exportedSettings = {
      name,
-     changName
+     changeName
    }
 
   return (

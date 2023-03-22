@@ -20,9 +20,18 @@ header {
 }
 main {
   flex: 1;
+  padding: 4em;
 }
 
 footer {
   background: #111;
   color: #eee;
+}
+
+main.light {
+  background: #f5f5f5;
+}
+
+main.dark {
+  background: #ccc;
 }
