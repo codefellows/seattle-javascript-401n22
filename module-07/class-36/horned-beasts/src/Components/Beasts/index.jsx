@@ -1,14 +1,17 @@
 import "./beasts.css";
 import Beast from "../Beast";
+import { useSelector } from "react-redux";
 
-const BEASTS = require("../../data.json");
+const Beasts = () => {
+  const beasts = useSelector((state) => state.beast.beasts);
 
-const Beasts = () => (
-  <section>
-    {BEASTS.map((beast) => (
-      <Beast beast={beast} />
-    ))}
-  </section>
-);
+  return (
+    <section>
+      {beasts.map((beast) => (
+        <Beast beast={beast} />
+      ))}
+    </section>
+  );
+};
 
 export default Beasts;
