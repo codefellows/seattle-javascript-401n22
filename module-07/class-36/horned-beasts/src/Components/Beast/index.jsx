@@ -1,3 +1,5 @@
+import "./beast.css";
+
 const Beast = ({ beast }) => (
   <article>
     <header>

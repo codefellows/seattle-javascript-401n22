@@ -1,0 +1,10 @@
+article {
+  border: 1px solid;
+  padding: 0 8px;
+  width: 200px;
+  border-radius: 4px;
+}
+
+figure {
+  margin: 0;
+}
