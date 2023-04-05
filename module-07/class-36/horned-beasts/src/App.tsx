@@ -2,6 +2,7 @@ import "./App.css";
 import Footer from "./Components/Footer";
 import Header from "./Components/Header";
 import Beasts from "./Components/Beasts";
+import BeastModal from "./Components/BeastModal";
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
       <Header />
       <Beasts />
       <Footer />
+      <BeastModal />
     </>
   );
 }

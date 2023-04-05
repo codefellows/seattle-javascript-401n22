@@ -7,10 +7,14 @@ const beastSlice = createSlice({
   initialState: {
     beasts: BEASTS,
     numberOfHorns: undefined,
+    selectedBeast: undefined,
   },
   reducers: {
     setHornCount: (state, action) => {
       state.numberOfHorns = action.payload;
+    },
+    showBeast: (state, action) => {
+      state.selectedBeast = action.payload;
     },
   },
 });
