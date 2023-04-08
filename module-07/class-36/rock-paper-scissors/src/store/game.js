@@ -1,5 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+export const PLAYER_WIN = 1;
+export const COMPUTER_WIN = -1;
+export const TIE = 0;
+export const BEST_OF = 3;
+
 const gameSlice = createSlice({
   name: "rock-paper-scissors",
   initialState: {
@@ -16,40 +21,40 @@ const gameSlice = createSlice({
         return;
       }
       state.playerThrow = action.payload.shot;
-      state.computerThrow = ai();
+      state.computerThrow = (action.payload.computer ?? DEFAULT_COMPUTER)();
 
       switch (rps(state.playerThrow, state.computerThrow)) {
-        case 1: // player wins
+        case PLAYER_WIN: // player wins
           state.playerWin += 1;
           break;
-        case -1: //computer wins
+        case COMPUTER_WIN: //computer wins
           state.computerWin += 1;
           break;
-        case 0: // tie
+        case TIE: // tie
         default:
         // Nothing happens!
       }
       state.shots += 1;
-      state.done = state.computerWin + state.playerWin >= 3;
+      state.done = state.computerWin + state.playerWin >= BEST_OF;
     },
   },
 });
 
-function ai() {
+function DEFAULT_COMPUTER() {
   return ["rock", "paper", "scissors"][(Math.random() * 3) | 0];
 }
 
 /** Returns -1 for computer wins, 0 for tie, and 1 for player wins */
-function rps(player, computer) {
+export function rps(player, computer) {
   switch (player) {
     case "rock":
       switch (computer) {
         case "rock":
-          return 0;
+          return TIE;
         case "paper":
-          return -1;
+          return COMPUTER_WIN;
         case "scissors":
-          return 1;
+          return PLAYER_WIN;
         default:
           throw new Error(
             `Invalid shots: Player ${player}, Computer ${computer}`
@@ -58,11 +63,11 @@ function rps(player, computer) {
     case "paper":
       switch (computer) {
         case "rock":
-          return 1;
+          return COMPUTER_WIN;
         case "paper":
-          return 0;
+          return TIE;
         case "scissors":
-          return -1;
+          return PLAYER_WIN;
         default:
           throw new Error(
             `Invalid shots: Player ${player}, Computer ${computer}`
@@ -71,11 +76,11 @@ function rps(player, computer) {
     case "scissors":
       switch (computer) {
         case "rock":
-          return -1;
+          return COMPUTER_WIN;
         case "paper":
-          return 1;
+          return PLAYER_WIN;
         case "scissors":
-          return 0;
+          return TIE;
         default:
           throw new Error(
             `Invalid shots: Player ${player}, Computer ${computer}`

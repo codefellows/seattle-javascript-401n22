@@ -28,11 +28,13 @@ const Game = () => {
         <li>Computer Wins: {game.computerWin}</li>
         <li>Done: {game.done ? "True" : "False"}</li>
       </ul>
-      <div className="flex flex-row">
+      <p>
         <button onClick={rock}>🪨</button>
+        &nbsp;
         <button onClick={paper}>📰</button>
+        &nbsp;
         <button onClick={scissors}>✂️</button>
-      </div>
+      </p>
     </main>
   );
 };
