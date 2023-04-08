@@ -37,6 +37,14 @@ const gameSlice = createSlice({
       state.shots += 1;
       state.done = state.computerWin + state.playerWin >= BEST_OF;
     },
+    resetGame: (state) => {
+      state.playerThrow = undefined;
+      state.computerThrow = undefined;
+      state.shots = 0;
+      state.playerWin = 0;
+      state.computerWin = 0;
+      state.done = false;
+    },
   },
 });
 
