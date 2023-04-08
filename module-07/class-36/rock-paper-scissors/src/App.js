@@ -1,10 +1,11 @@
+import Game from "./Components/Game";
 import Header from "./Components/Header";
 
 function App() {
   return (
     <>
       <Header />
-      <main></main>
+      <Game />
     </>
   );
 }
