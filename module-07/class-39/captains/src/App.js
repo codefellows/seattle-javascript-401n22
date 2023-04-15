@@ -1,15 +1,42 @@
 import "./App.css";
 
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import ErrorPage from "./errorPage";
+import HomePage from "./Home";
+import Captain from "./Captain";
+import PageLayout from "./PageLayout";
+
+// const router = createBrowserRouter([
+//   {
+//     path: "/",
+//     element: <PageLayout />,
+//     errorElement: <ErrorPage />,
+//     children: [
+//       {
+//         path: "/",
+//         element: <HomePage />,
+//       },
+//       {
+//         //     /captain/Marvel => {name: "Marvel"}
+//         path: "/captain/:name",
+//         element: <Captain />,
+//       },
+//     ],
+//   },
+// ]);
+
 function App() {
   return (
     <>
-      <header className="fluid">
-        <nav>
-          <h1 style={{ "--color-h1": "var(--color-inverse)" }}>Captains</h1>
-        </nav>
-      </header>
-      <main></main>
-      <footer>&copy; 2023 David Souther & Code Fellows (js 401 n22)</footer>
+      {/* <RouterProvider router={router} /> */}
+      <BrowserRouter>
+        <Routes>
+          <Route element={<PageLayout />} errorElement={<ErrorPage />}>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/captain/:name" element={<Captain />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }
