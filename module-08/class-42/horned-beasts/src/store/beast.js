@@ -1,11 +1,17 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-const BEASTS = require("./data.json");
+// const BEASTS = require("./data.json");
+
+export const loadBeasts = createAsyncThunk("beasts/load", async () => {
+  const response = await fetch("/data.json");
+  const json = await response.json();
+  return json;
+});
 
 const beastSlice = createSlice({
   name: "beast",
   initialState: {
-    beasts: BEASTS,
+    beasts: [],
     numberOfHorns: undefined,
     selectedBeast: undefined,
   },
@@ -16,6 +22,11 @@ const beastSlice = createSlice({
     showBeast: (state, action) => {
       state.selectedBeast = action.payload;
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(loadBeasts.fulfilled, (state, { payload }) => {
+      state.beasts = payload;
+    });
   },
 });
 

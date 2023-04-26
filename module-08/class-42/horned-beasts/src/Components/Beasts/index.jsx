@@ -1,9 +1,14 @@
 import "./beasts.css";
 import Beast from "../Beast";
-import { filteredBeasts } from "../../store/beast";
-import { useSelector } from "react-redux";
+import { filteredBeasts, loadBeasts } from "../../store/beast";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 
 const Beasts = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(loadBeasts());
+  }, [dispatch]);
   const beasts = useSelector(filteredBeasts);
   return (
     <section>
